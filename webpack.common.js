@@ -1,6 +1,8 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 
 module.exports = {
   entry: "./src/index.ts",
@@ -25,8 +27,13 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        // use: "ts-loader",
+        loader: "ts-loader",
         exclude: /node_modules/,
+        options: {
+          // disable type checker - we will use it in fork plugin
+          transpileOnly: true
+        }
       },
     ],
   },
@@ -42,6 +49,11 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       title: "Excalibur Webpack Sample",
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: '/Users/ts-matthewjam.molloy/rakuten/template-ts-webpack/tsconfig.json'
+      }
     }),
   ],
 };

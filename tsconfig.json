@@ -7,7 +7,7 @@
     "module": "es6",
     "sourceMap": true,
     "outDir": "./dist/",
-    "incremental": true,
-    "tsBuildInfoFile": ".build-info"
+    // "incremental": true,
+    // "tsBuildInfoFile": ".build-info"
   }
 }

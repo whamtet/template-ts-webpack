@@ -5,6 +5,9 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 
 module.exports = {
+  watchOptions: {
+    aggregateTimeout: 500,
+  },
   entry: "./src/index.ts",
   target: "web",
   output: {
@@ -52,7 +55,14 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: {
-        configFile: '/Users/ts-matthewjam.molloy/rakuten/template-ts-webpack/tsconfig.json'
+        // build: true,
+        mode: 'write-references',
+        configOverwrite: {
+          compilerOptions: {
+            incremental: true,
+            tsBuildInfoFile: '.build-info4',
+          },
+        }
       }
     }),
   ],
